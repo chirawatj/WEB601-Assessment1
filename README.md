@@ -1,6 +1,6 @@
 # WEB601-Assessment1
 
-Repository for the NMIT Te Pukenga WEB601 Assessment One.
+This repository is for the NMIT Te Pukenga WEB601 Assessment One.
 <br><br>
 
 ## Team
