@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: black;
+}
+
+
+/* <-------- Header --------> */
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FD4556;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+}
+.header h1 {
+    margin: 0;
+}
+
+
+/* <-------- Nav --------> */
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nav-item {
+    display: inline-block;
+    padding: 10px;
+}
+.nav-item a {
+    color: white;
+    text-decoration: none;
+}
+.nav-item a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+.nav-item a:visited {
+    color: white;
+}
+
+
+/* <-------- Blog Body --------> */
+.blog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.blog-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    gap: 20px;
+}
+
+.blog-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+
+/* <-------- Footer --------> */
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #FD4556;
+    color: white;
+    padding: 0 20px;
+    margin: 0;
+}
