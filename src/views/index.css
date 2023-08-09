@@ -46,7 +46,7 @@ body {
 
 
 /* <-------- Blog Body --------> */
-.blog-container {
+article {
     display: flex;
     flex-direction: column;
     justify-content: center;

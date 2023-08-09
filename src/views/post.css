@@ -47,18 +47,107 @@ body {
 
 /* <-------- Blog Body --------> */
 
-
 article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    gap: 40px;
+}
+
+#blog-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    padding: 40px;
+    gap: 40px;
+}
+
+#blog {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: white;
     color: black;
-    padding: 10px 20px;
-    margin: 20px;
+    padding: 20px;
     border-radius: 10px;
+    width: 100%;
 }
+
+article h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 20px 0 0 0;
+}
+
+article h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 10px 0 20px 0;
+}
+
+.img {
+    height: 400px;
+    width: auto;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+p {
+    margin: 20px 0 10px 0;
+}
+
+
+/* <-------- Comment Section --------> */
+
+#comment-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    padding: 10px 20px;
+    margin: 0;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#comment-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+}
+
+#comments-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 10px;
+    gap: 10px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    padding: 0;
+    background-color: rgba(253, 69, 86, 0.2);
+    border-radius: 10px;
+    width: 100%;
+}
+
+
 
 
 
