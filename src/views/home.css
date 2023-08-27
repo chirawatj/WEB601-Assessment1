@@ -56,15 +56,15 @@ article {
     margin: 0;
 }
 
-.blog-column {
+#blog-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    padding: 10px 20px;
+    padding: 40px;
     margin: 0;
-    gap: 20px;
+    gap: 40px;
 }
 
 .blog-item {
@@ -77,6 +77,7 @@ article {
     overflow: hidden;
     border-radius: 10px;
     border: 2px solid #FD4556;
+    margin: 0;
 }
 .blog-item img {
     width: 300px;
