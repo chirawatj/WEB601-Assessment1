@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, 'src', 'views')));
 
 app.use((req, res, next) => {
     console.log(`Request: '${req.method}' for path: '${req.url}' at ${new Date()}`);
