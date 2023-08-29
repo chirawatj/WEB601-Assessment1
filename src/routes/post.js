@@ -1,11 +1,11 @@
-const express = require('express'); // declare a variable to hold the route
-const router = express.Router();
+const express = require('express'); // import express
+const router = express.Router(); // create instance of express router
+const path = require('path'); // import path
+const rootDir = require('../util/path'); // import rootDir
 
-const path = require('path');
-const rootDir = require('../util/path');
-
+// create a route for the home page
 router.get('/', (req, res, next) => { 
-    res.sendFile(path.join(rootDir, 'src', 'views', 'post.html')); //route path
+    res.sendFile(path.join(rootDir, 'src', 'views', 'home.html')); //route path
 });
 
 module.exports = router;
