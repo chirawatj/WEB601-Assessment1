@@ -44,43 +44,37 @@ const getComments = async () => {
     console.log('Retrieved and displayed comments');
 };
 
-// add comment to database functionality
-// need an event listener for button click
-// need to get the values from the form
-// need to send the values to the server
-
+// add comments
 commentsContainer.addEventListener('click', async (event) => {
     
     const target = event.target; // get the element that was clicked
-    const commentsContainer = document.getElementById('comments-container');
     const formName = document.getElementById('form-name');
     const formMessage = document.getElementById('form-message');
-    const name = formName.value
+    const username = formName.value
     const message = formMessage.value
     if (target.classList.contains('post-btn')) {
-    if (name.trim() === '' || message.trim() === '') {
+    if (username.trim() === '' || message.trim() === '') {
         alert('Please enter both a name and a comment.');
         return;
     }
-    const response = await fetch('/comments', {method: 'POST'});
+    const response = await fetch('/comments', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, message })
+    });
     if (response.ok) {
-        const newComment = await response.json();
-        commentsContainer.innerHTML = '';
+        const addedComments = await response.json();
+        getComments(addedComments);
         formName.value = '';
         formMessage.value = '';
     } else {
         alert('Failed to add comment. Please try again.');
-    }
-
-    if (response.status === 204) { // 204 = success, no content
-        console.log(`Comment Posted`);
-        getComments(); // get comments from database and display
-    } else {
-        console.log(`Error Posting comment`);
     }}
 });
 
-
+// delete comments
 commentsContainer.addEventListener('click', async (event) => {
     const target = event.target; // get the element that was clicked
     
@@ -103,6 +97,37 @@ commentsContainer.addEventListener('click', async (event) => {
 // need to get the id of the comment to update
 // need to send the id to the server
 // update displayed comments
+
+
+commentsContainer.addEventListener('click', async (event) => {
+    const target = event.target; // get the element that was clicked
+    if (target.classList.contains('update-btn')) {
+        
+        const commentId = target.getAttribute('data-id');
+        // Get the existing comment text from the <p> element
+        const existingCommentText = target.parentElement.parentElement.querySelector('p').textContent;
+
+        // Prompt the user for a new comment text, pre-filled with the existing text
+        const newComment = prompt('Edit the comment:', existingCommentText);
+
+            if (newComment !== null) {
+                const response = await fetch(`/comments/${commentId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: newComment }),
+                })
+                if (response.status === 204) { // 204 = success, no content
+                    console.log(`Comment with id ${commentId} updated`);
+                    getComments(); // get comments from database and display
+                } else {
+                    console.log(`Error updating comment with id ${commentId}`);
+                }
+            }
+        }
+});
+
 
 // get comments from database and display on page load
 getComments();

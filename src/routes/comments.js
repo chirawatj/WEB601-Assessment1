@@ -5,6 +5,8 @@ const path = require('path'); // import path
 const fs = require('fs').promises; // import file system
 const databasePath = path.join(__dirname, '..', 'database/comments.json'); // where to find the database
 
+let comments = {};
+
 // general function to get all comments which can be used by multiple routes
 getComments = async () => {
     try {
@@ -35,13 +37,14 @@ router.get('/comments', async (req, res) => {
 // read and update database
 // rewrite database
 
-router.post('/comments', (req, res) => {
-    const { name, message } = req.body;
-
-    const newComment = { name, message };
-    comments.push(newComment);
-  
-    fs.writeFileSync(databasePath, JSON.stringify(comments, null, 2));
+router.post('/comments', async (req, res) => {
+    const { username, message } = req.body;
+    const commentId = (Object.keys(comments).length + 1).toString();
+    const newComment = { username, message };
+    comments[commentId] = newComment;
+    
+    fs.writeFile(databasePath, JSON.stringify(comments, null, 2)); // write the updated database
+    res.status(201).json(comments);
   });
 
 // update comment function
@@ -50,19 +53,21 @@ router.post('/comments', (req, res) => {
 // receive details of updated comment and id
 // read, update, write database
 
-// router.put('/comments/:id', async (req, res) => {
-//   const comments = getComments();
-//   const commentId = parseInt(req.params.id);
-//   const updatedComment = req.body;
+router.put('/comments/:id', async (req, res) => {
+    const commentId = req.params.id;
+    const updatedText = req.body.message; 
+    let comments = getComments();
 
-//   if (commentId >= 0 && commentId < comments.length) {
-//       comments[commentId] = updatedComment;
-//       fs.writeFile(databasePath, JSON.stringify(response, null, 2));
-//       res.json(updatedComment);
-//   } else {
-//       res.status(404).json({ error: 'Comment not found' });
-//   }
-// });
+    if (comments.hasOwnProperty(commentId)) {
+        comments[commentId].message = updatedText;
+
+        fs.writeFile(databasePath, JSON.stringify(response, null, 2));
+
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 
 // delete comment
