@@ -37,7 +37,7 @@ const getComments = async () => {
         <h4>New Comment</h4>
         <input type="text" id="form-name" placeholder="Display Name" maxlength="20">
         <textarea id="form-message" placeholder="Comment" maxlength="100"></textarea>
-        <button type="submit">Post</button>
+        <button type="submit" class="post-btn">Post</button>
     `;
     commentsContainer.appendChild(commentForm);
 
@@ -49,9 +49,15 @@ const getComments = async () => {
 // need to get the values from the form
 // need to send the values to the server
 
-commentsContainer.addEventListener('click', async () => {
+commentsContainer.addEventListener('click', async (event) => {
+    
+    const target = event.target; // get the element that was clicked
+    const commentsContainer = document.getElementById('comments-container');
+    const formName = document.getElementById('form-name');
+    const formMessage = document.getElementById('form-message');
     const name = formName.value
     const message = formMessage.value
+    if (target.classList.contains('post-btn')) {
     if (name.trim() === '' || message.trim() === '') {
         alert('Please enter both a name and a comment.');
         return;
@@ -60,7 +66,6 @@ commentsContainer.addEventListener('click', async () => {
     if (response.ok) {
         const newComment = await response.json();
         commentsContainer.innerHTML = '';
-        getComments();
         formName.value = '';
         formMessage.value = '';
     } else {
@@ -68,11 +73,11 @@ commentsContainer.addEventListener('click', async () => {
     }
 
     if (response.status === 204) { // 204 = success, no content
-        console.log(`Comment with id ${commentId} Posted`);
+        console.log(`Comment Posted`);
         getComments(); // get comments from database and display
     } else {
-        console.log(`Error Posting comment with id ${commentId}`);
-    }
+        console.log(`Error Posting comment`);
+    }}
 });
 
 
@@ -102,3 +107,4 @@ commentsContainer.addEventListener('click', async (event) => {
 // get comments from database and display on page load
 getComments();
 console.log('Loading comments');
+
