@@ -22,7 +22,7 @@ const getComments = async () => {
         commentElement.innerHTML = `
             <div class="comment-top">
                 <h4>${comment.username}</h4>
-                <button type="button" class="update-btn">Update</button>
+                <button type="button" class="update-btn" data-id=${commentId}>Update</button>
                 <button type="button" class="delete-btn" data-id=${commentId}>Delete</button>
             </div>
             <p>${comment.message}</p>
@@ -48,6 +48,33 @@ const getComments = async () => {
 // need an event listener for button click
 // need to get the values from the form
 // need to send the values to the server
+
+commentsContainer.addEventListener('click', async () => {
+    const name = formName.value
+    const message = formMessage.value
+    if (name.trim() === '' || message.trim() === '') {
+        alert('Please enter both a name and a comment.');
+        return;
+    }
+    const response = await fetch('/comments', {method: 'POST'});
+    if (response.ok) {
+        const newComment = await response.json();
+        commentsContainer.innerHTML = '';
+        getComments();
+        formName.value = '';
+        formMessage.value = '';
+    } else {
+        alert('Failed to add comment. Please try again.');
+    }
+
+    if (response.status === 204) { // 204 = success, no content
+        console.log(`Comment with id ${commentId} Posted`);
+        getComments(); // get comments from database and display
+    } else {
+        console.log(`Error Posting comment with id ${commentId}`);
+    }
+});
+
 
 commentsContainer.addEventListener('click', async (event) => {
     const target = event.target; // get the element that was clicked

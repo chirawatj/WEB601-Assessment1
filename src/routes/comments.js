@@ -35,11 +35,35 @@ router.get('/comments', async (req, res) => {
 // read and update database
 // rewrite database
 
+router.post('/comments', (req, res) => {
+    const { name, message } = req.body;
+
+    const newComment = { name, message };
+    comments.push(newComment);
+  
+    fs.writeFileSync(databasePath, JSON.stringify(comments, null, 2));
+  });
+
 // update comment function
 // which method will this be?
 // probably need to build some sort of update form, maybe reuse the create comment form?
 // receive details of updated comment and id
 // read, update, write database
+
+// router.put('/comments/:id', async (req, res) => {
+//   const comments = getComments();
+//   const commentId = parseInt(req.params.id);
+//   const updatedComment = req.body;
+
+//   if (commentId >= 0 && commentId < comments.length) {
+//       comments[commentId] = updatedComment;
+//       fs.writeFile(databasePath, JSON.stringify(response, null, 2));
+//       res.json(updatedComment);
+//   } else {
+//       res.status(404).json({ error: 'Comment not found' });
+//   }
+// });
+
 
 // delete comment
 router.delete('/comments/:id', async (req, res) => {
