@@ -1,4 +1,5 @@
 const express = require('express'); // import express   
+const { get } = require('http');
 const router = express.Router(); // create instance of express router
 const path = require('path'); // import path
 const fs = require('fs').promises; // import file system
@@ -13,7 +14,6 @@ getComments = async () => {
         console.log('Comments received')
         return comments;
     } catch (error) {
-        console.log(error);
         return 'error'
     }
 }
@@ -31,8 +31,10 @@ router.get('/comments', async (req, res) => {
 // add comment
 router.post('/comments', async (req, res) => {
     const { username, message } = req.body;
+    let comments = await getComments();
     const commentId = (Object.keys(comments).length + 1).toString();
     const newComment = { username, message };
+
     comments[commentId] = newComment;
     
     fs.writeFile(databasePath, JSON.stringify(comments, null, 2)); // write the updated database

@@ -15,7 +15,7 @@ const getComments = async () => {
 
     // create html element for each comment
     Object.keys(comments).forEach(commentId => {
-        comment =  comments[commentId]
+        let comment =  comments[commentId]
         const commentElement = document.createElement('div'); // create comment element
         commentElement.classList.add('comment'); // add comment class
         // add comment html and details
@@ -46,7 +46,6 @@ const getComments = async () => {
 
 // add comments
 commentsContainer.addEventListener('click', async (event) => {
-    
     const target = event.target; // get the element that was clicked
     const formName = document.getElementById('form-name');
     const formMessage = document.getElementById('form-message');
@@ -92,13 +91,6 @@ commentsContainer.addEventListener('click', async (event) => {
     }
 });
 
-// update comments functionality
-// need an event listener for button clicks for update
-// need to get the id of the comment to update
-// need to send the id to the server
-// update displayed comments
-
-
 commentsContainer.addEventListener('click', async (event) => {
     const target = event.target; // get the element that was clicked
     if (target.classList.contains('update-btn')) {
@@ -127,7 +119,6 @@ commentsContainer.addEventListener('click', async (event) => {
             }
         }
 });
-
 
 // get comments from database and display on page load
 getComments();
