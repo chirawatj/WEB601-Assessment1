@@ -56,16 +56,16 @@ router.post('/comments', async (req, res) => {
 router.put('/comments/:id', async (req, res) => {
     const commentId = req.params.id;
     const updatedText = req.body.message; 
-    let comments = getComments();
+    let response = await getComments();
 
-    if (comments.hasOwnProperty(commentId)) {
-        comments[commentId].message = updatedText;
+    if (response.hasOwnProperty(commentId)) {
+        response[commentId].message = updatedText;
 
-        fs.writeFile(databasePath, JSON.stringify(response, null, 2));
-
-        res.sendStatus(200);
+        await fs.writeFile(databasePath, JSON.stringify(response, null, 2));
+        
+        res.status(204).end();
     } else {
-        res.sendStatus(404);
+        res.status(404).json({message: `Comment with id ${commentId} not found`}); // send error message to client
     }
 });
 
@@ -80,7 +80,7 @@ router.delete('/comments/:id', async (req, res) => {
     // find and delete the comment
     if (response.hasOwnProperty(commentId)) { // if the comment exists
         delete response[commentId]; // delete the comment
-        await fs.writeFile(databasePath, JSON.stringify(response, null, 2)); // write the updated database
+        fs.writeFile(databasePath, JSON.stringify(response, null, 2)); // write the updated database
         res.status(204).end(); // send success message to client without content
     } else {
         res.status(404).json({message: `Comment with id ${commentId} not found`}); // send error message to client

@@ -116,7 +116,7 @@ commentsContainer.addEventListener('click', async (event) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ text: newComment }),
+                    body: JSON.stringify({ message: newComment }),
                 })
                 if (response.status === 204) { // 204 = success, no content
                     console.log(`Comment with id ${commentId} updated`);
