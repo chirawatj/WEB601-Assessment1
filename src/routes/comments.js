@@ -1,11 +1,8 @@
 const express = require('express'); // import express   
-const { get } = require('http');
 const router = express.Router(); // create instance of express router
 const path = require('path'); // import path
 const fs = require('fs').promises; // import file system
 const databasePath = path.join(__dirname, '..', 'database/comments.json'); // where to find the database
-
-let comments = {};
 
 // general function to get all comments which can be used by multiple routes
 getComments = async () => {
@@ -31,12 +28,7 @@ router.get('/comments', async (req, res) => {
     } 
 });
 
-// create comment function
-// which method will this be?
-// receive details of new comment
-// read and update database
-// rewrite database
-
+// add comment
 router.post('/comments', async (req, res) => {
     const { username, message } = req.body;
     const commentId = (Object.keys(comments).length + 1).toString();
@@ -47,12 +39,7 @@ router.post('/comments', async (req, res) => {
     res.status(201).json(comments);
   });
 
-// update comment function
-// which method will this be?
-// probably need to build some sort of update form, maybe reuse the create comment form?
-// receive details of updated comment and id
-// read, update, write database
-
+// update comment
 router.put('/comments/:id', async (req, res) => {
     const commentId = req.params.id;
     const updatedText = req.body.message; 
@@ -68,7 +55,6 @@ router.put('/comments/:id', async (req, res) => {
         res.status(404).json({message: `Comment with id ${commentId} not found`}); // send error message to client
     }
 });
-
 
 // delete comment
 router.delete('/comments/:id', async (req, res) => {
