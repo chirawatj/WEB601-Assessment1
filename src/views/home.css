@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: black;
+}
+
+
+/* <-------- Header --------> */
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FD4556;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+}
+.header h1 {
+    margin: 0;
+}
+
+
+/* <-------- Nav --------> */
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nav-item {
+    display: inline-block;
+    padding: 10px;
+}
+.nav-item a {
+    color: white;
+    text-decoration: none;
+}
+.nav-item a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+.nav-item a:visited {
+    color: white;
+}
+
+
+/* <-------- Blog Body --------> */
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+#blog-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 40px;
+    margin: 0;
+    gap: 40px;
+}
+
+.blog-item {
+    display: flex;
+    flex-direction: row;    
+    height: 300px;
+    width: 800px;
+    background-color: white;
+    color: black;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid #FD4556;
+    margin: 0;
+}
+.blog-item img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+.blog-text {
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    color: black;
+    padding: 0;
+    margin: 0 20px;
+}
+
+.blog-text h2 {
+    margin: 10px 0 0 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.blog-text h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.blog-text p {
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+
+.blog-text a {
+    color: blue;
+    text-decoration: none;
+}
+.blog-text a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+
+/* <-------- Footer --------> */
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #FD4556;
+    color: white;
+    padding: 0 20px;
+    margin: 0;
+}
