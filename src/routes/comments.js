@@ -30,27 +30,27 @@ router.get('/comments', async (req, res) => {
 
 // add comment
 router.post('/comments', async (req, res) => {
-    const { username, message } = req.body;
-    let comments = await getComments();
-    const commentId = (Object.keys(comments).length + 1).toString();
-    const newComment = { username, message };
+    const { username, message } = req.body; // create a variables username and message  
+    let response = await getComments(); // get all comments from database
+    const commentId = Date.now().toString(); // crate user comment with unique ID
+    const newComment = { username, message }; // create new comment
 
-    comments[commentId] = newComment;
+    response[commentId] = newComment; // add comment with unique ID
     
-    fs.writeFile(databasePath, JSON.stringify(comments, null, 2)); // write the updated database
-    res.status(201).json(comments);
+    await fs.writeFile(databasePath, JSON.stringify(response, null, 2)); // write the updated database
+    res.status(201).json(response);
   });
 
 // update comment
 router.put('/comments/:id', async (req, res) => {
-    const commentId = req.params.id;
-    const updatedText = req.body.message; 
-    let response = await getComments();
+    const commentId = req.params.id; // get the id of the comment
+    const updatedText = req.body.message;  // get the comment text
+    let response = await getComments(); // get all comments from database
 
-    if (response.hasOwnProperty(commentId)) {
-        response[commentId].message = updatedText;
+    if (response.hasOwnProperty(commentId)) { // if the comment exists
+        response[commentId].message = updatedText; // update the comment
 
-        await fs.writeFile(databasePath, JSON.stringify(response, null, 2));
+        await fs.writeFile(databasePath, JSON.stringify(response, null, 2)); // write the updated comment to database
         
         res.status(204).end();
     } else {

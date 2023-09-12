@@ -52,8 +52,8 @@ commentsContainer.addEventListener('click', async (event) => {
     const username = formName.value
     const message = formMessage.value
     if (target.classList.contains('post-btn')) {
-    if (username.trim() === '' || message.trim() === '') {
-        alert('Please enter both a name and a comment.');
+    if (username.trim() === '' || message.trim() === '') { // check if the string is empty
+        alert('Please enter both a name and a comment.'); // create an alert if text box is empty
         return;
     }
     const response = await fetch('/comments', {
@@ -63,13 +63,13 @@ commentsContainer.addEventListener('click', async (event) => {
         },
         body: JSON.stringify({ username, message })
     });
-    if (response.ok) {
+    if (response.ok) { // add comment
         const addedComments = await response.json();
         getComments(addedComments);
         formName.value = '';
         formMessage.value = '';
     } else {
-        alert('Failed to add comment. Please try again.');
+        alert('Failed to add comment. Please try again.'); // create an alert if add comment failed
     }}
 });
 
@@ -91,6 +91,7 @@ commentsContainer.addEventListener('click', async (event) => {
     }
 });
 
+// update comments
 commentsContainer.addEventListener('click', async (event) => {
     const target = event.target; // get the element that was clicked
     if (target.classList.contains('update-btn')) {
